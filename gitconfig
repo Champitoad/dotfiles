@@ -1,0 +1,13 @@
+[alias]
+	ci = commit
+	st = status
+	br = branch
+    co = checkout
+    rgrep = !git grep
+[user]
+	email = pablo.donato@mailoo.org
+	name = Pablo Donato
+[core]
+	editor = vim
+[push]
+	default = simple
