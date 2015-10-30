@@ -31,7 +31,6 @@ set splitbelow
 set splitright
 
 " Maximum tabs you can open
-
 set tabpagemax=100
 
 " Use "," key for plugins commands shortcuts
@@ -72,7 +71,6 @@ autocmd ColorScheme * highlight TabLineSel ctermbg=None
 call plug#begin('/home/pablo/.vim/plugged')
 
 " Make sure you use single quotes
-Plug 'junegunn/seoul256.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
@@ -89,11 +87,5 @@ Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
 " Using git URL
 Plug 'https://github.com/junegunn/vim-github-dashboard.git'
-
-" Plugin options
-Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
-
-" Plugin outside ~/.vim/plugged with post-update hook
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 
 call plug#end()
