@@ -1,6 +1,9 @@
 # Automatic rehash to avoid reloading shell when installing new programs
 setopt nohashdirs
 
+# Extended globbing
+setopt extended_glob
+
 ########## Oh-My-Zsh ##########
 
 plugins=(vi-mode chucknorris common-aliases dircycle git gitfast git-extras history-substring-search last-working-dir lol nyan systemd z)
@@ -150,6 +153,7 @@ alias vimrc="vim ~/.vim/config/settings.vim"
 alias rn="perl-rename"
 alias naut="nautilus . NUL BG"
 alias arcsans="sudo sed -i 's/Cantarell/NotoSans, Cantarell/g' /usr/share/themes/Arc/gnome-shell/gnome-shell.css && gnome-shell --replace NUL BG" # Arc gnome-shell theme Sans font
+alias rmscr='rm -f ~/Capture*.{png,webm}' # Removes all Gnome screen[shot|record]s in ~
 
 # Global aliases
 alias -g CC=" | xclip -sel 'clipboard'" # Clipboard Copy
@@ -159,6 +163,11 @@ alias -g BG=" & disown" # Continue the process in background while detaching it 
 unalias rm # Override default rm -i
 
 ##### Functions #####
+
+# Creates, then browse directory $1
+function mk {
+    mkdir $1 && cd $1
+}
 
 # Sign the APK $1 with the alias $2
 function signapk {
