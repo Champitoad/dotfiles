@@ -1,32 +1,31 @@
 # Automatic rehash to avoid reloading shell when installing new programs
 setopt nohashdirs
 
-# Extended globbing
-setopt extended_glob
-
 ########## Oh-My-Zsh ##########
 
-plugins=(vi-mode chucknorris common-aliases dircycle git gitfast git-extras history-substring-search last-working-dir lol nyan systemd z)
-ZSH_THEME=wezm
+ZSH=/home/pablo/.oh-my-zsh
+
+plugins=(vi-mode archlinux common-aliases dircycle git gitfast extras history-substring-search last-working-dir systemd z)
+ZSH_THEME=""
 DEFAULT_USER=pablo
-export ZSH=/home/pablo/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
+
+# Custom prompt theme
+source /home/pablo/.themes/zsh/pico.zsh
 
 ########## Vi-mode ##########
 
-# Change prompt color to match current mode
-ncolor='red'
-icolor='yellow'
-zle-keymap-select() {
-    case $KEYMAP in
-        vicmd) PROMPT=$(echo $PROMPT | sed "s/\$fg\[.*\]%}%#/\$fg\[$ncolor\]%}%#/");;
-        viins|main) PROMPT=$(echo $PROMPT | sed "s/\$fg\[.*\]%}%#/\$fg\[$icolor\]%}%#/");;
-    esac
-    zle reset-prompt
-}
-
 # Escape normal mode timeout to 0.1s
 export KEYTIMEOUT=1
+
+########## Globbing ##########
+
+# Extended globbing
+setopt extendedglob
+setopt kshglob
+
+# Replace no matches by blank instead of reporting an error
+setopt nullglob
 
 ########## Completion ##########
 
@@ -40,9 +39,6 @@ setopt completealiases
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
-
-# Disable bang history expansion
-setopt nobanghist
 
 # Ignore duplicates in commands history
 setopt HIST_IGNORE_ALL_DUPS
@@ -121,7 +117,7 @@ fi
 export TERM=xterm-256color
 
 # Base16 Shell
-BASE16_SHELL="/home/pablo/.config/base16-shell/base16-default.dark.sh"
+BASE16_SHELL="/home/pablo/.config/base16-shell/base16-default-dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 # Colorize tree command output
@@ -143,6 +139,12 @@ man() {
     man "$@"
 }
 
+# OPAM configuration
+. /home/pablo/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+# SSH agent
+eval $(keychain --eval --quiet --noask id_rsa_github id_rsa_jussieu)
+
 ########## Day2Day configuration ##########
 
 ##### Aliases #####
@@ -150,10 +152,11 @@ man() {
 # Normal aliases
 alias vim="vim -p"
 alias vimrc="vim ~/.vim/config/settings.vim"
+alias ls="ls --group-directories-first --color -h"
 alias rn="perl-rename"
 alias naut="nautilus . NUL BG"
 alias arcsans="sudo sed -i 's/Cantarell/NotoSans, Cantarell/g' /usr/share/themes/Arc/gnome-shell/gnome-shell.css && gnome-shell --replace NUL BG" # Arc gnome-shell theme Sans font
-alias rmscr='rm -f ~/Capture*.{png,webm}' # Removes all Gnome screen[shot|record]s in ~
+alias rmscr="rm -f ~/screenshot-*.png" # Removes all screenshots in ~
 
 # Global aliases
 alias -g CC=" | xclip -sel 'clipboard'" # Clipboard Copy
@@ -164,9 +167,21 @@ unalias rm # Override default rm -i
 
 ##### Functions #####
 
-# Creates, then browse directory $1
+# Create, then browse directory $1
 function mk {
-    mkdir $1 && cd $1
+    mkdir -p $1 && cd $1
+}
+
+# Backup file $1 with .bak extension
+function bak {
+    cp $1 $1.bak
+}
+
+# Switch the names of files $1 and $2
+function nsw {
+    mv $1 tmp
+    mv $2 $1
+    mv tmp $2
 }
 
 # Sign the APK $1 with the alias $2
@@ -179,11 +194,11 @@ function signapk {
     apk=$1
     alias=$2
     keystore=`dirname $apk`/${alias}.keystore
-    newapk=`dirname $1`/${alias}.apk
+    newapk=`dirname $apk`/${alias}.apk
 
     keytool -genkey -keystore $keystore -alias $alias -keyalg RSA -keysize 2048 -validity 10000
     jarsigner -sigalg SHA1withRSA -digestalg SHA1 -keystore $keystore $apk $alias
-    if [ -e $newapk ]; then rm $newapk; fi
+    if [ -e $newapk ]; then echo pouet; rm $newapk; fi
     /opt/android-sdk/build-tools/21.1.1/zipalign 4 $apk $newapk
 }
 
@@ -192,16 +207,48 @@ function tpzip {
     zip -r $1/$(basename $1).zip $1
 }
 
-# Repeat command $2 $1 times (doesn't work as of now)
+# Repeat command $2 $1 times ($1 < 0 causes infinite loop)
 function rep {
-    for i in range $(seq 1 $1); do
-        $2
+    n=$1
+    shift
+    while [ $n -ne 0 ]; do
+        zsh -c "$*"
+        ((n--))
     done
 }
 
-# Shell variables
-export EDITOR=vim
-export PATH="$PATH:/home/pablo/.bin"
+# Extracts pages $1 to $2 from PDF $3 into $3_p$1-$2.pdf
+function pdfpextr() {
+    gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER \
+       -dFirstPage=${1} \
+       -dLastPage=${2} \
+       -sOutputFile=${3%.pdf}_p${1}-p${2}.pdf \
+       ${3}
+}
+
+# Prints bank account password
+function pbpwd {
+    pwd_archive=/mnt/data/Documents/MDP.7z
+    filename=banque.txt
+    7z e $pwd_archive $filename -o. \
+    && cat $filename && echo \
+    && rm $filename
+}
+
+# Compile MarkDown file into PDF, then view it
+function mdview {
+    pandoc $1 -o ${1%.md}.pdf
+    pidfile=.${1%.md}.mdview.pid
+    if [[ ! -e $pidfile ]]; then
+        xdg-open ${1%.md}.pdf & echo $! > $pidfile && disown
+    else
+        pid=$(cat $pidfile)
+        if [[ ! $(ps -p $pid -o pid=) ]]; then
+            rm $pidfile
+            xdg-open ${1%.md}.pdf & echo $! > $pidfile && disown
+        fi
+    fi
+}
 
 # Zsh syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

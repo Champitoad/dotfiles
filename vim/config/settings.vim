@@ -2,7 +2,7 @@
 set nocompatible
 
 " Load zsh parameters for commands
-set shell=/bin/zsh\ -i
+set shell=/bin/zsh
 
 " Commands history
 set history=1000
@@ -13,6 +13,12 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
+
+" Folding settings
+set foldmethod=syntax
+set foldnestmax=10
+set nofoldenable
+set foldlevel=1
 
 " Use mouse
 set mouse=a
@@ -32,9 +38,6 @@ set splitright
 
 " Maximum tabs you can open
 set tabpagemax=100
-
-" Use "," key for plugins commands shortcuts
-let mapleader=","
 
 " Automatic filetype detection for coloration
 filetype plugin on
@@ -66,6 +69,15 @@ autocmd ColorScheme * highlight TabLineFill ctermbg=None
 autocmd ColorScheme * highlight TabLine ctermbg=None
 autocmd ColorScheme * highlight TabLineSel ctermbg=None
 
+" Syntax highlighting
+
+augroup filetype
+    au BufRead,BufNewFile *.flex,*.jflex    set filetype=jflex 
+    au BufRead,BufNewFile *.cup             set filetype=cup
+augroup END
+au Syntax jflex so ~/.vim/syntax/jflex.vim
+au Syntax cup   so ~/.vim/syntax/cup.vim
+
 " vim-plug
 
 call plug#begin('/home/pablo/.vim/plugged')
@@ -75,17 +87,28 @@ Plug 'junegunn/vim-easy-align'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-abolish'
 Plug 'vim-scripts/visualrepeat'
 Plug 'aklt/plantuml-syntax'
-
-" Group dependencies, vim-snippets depends on ultisnips
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-
-" On-demand loading
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-
-" Using git URL
-Plug 'https://github.com/junegunn/vim-github-dashboard.git'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'asciidoc/vim-asciidoc'
+Plug 'beyondwords/vim-twig'
+Plug 'lervag/vimtex'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'let-def/ocp-indent-vim'
+Plug 'dhruvasagar/vim-table-mode'
 
 call plug#end()
+
+" Plugins options
+
+" Use "," key for plugins commands shortcuts
+let mapleader=","
+
+" vim-pandoc
+let g:pandoc#spell#enabled = 0
+
+" vim-table-mode
+let g:table_mode_corner_corner='+'
+let g:table_mode_header_fillchar='='
