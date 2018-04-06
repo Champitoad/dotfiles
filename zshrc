@@ -153,6 +153,7 @@ eval $(keychain --eval --quiet --noask id_rsa_github id_rsa_jussieu)
 alias vim="vim -p"
 alias vimrc="vim ~/.vim/config/settings.vim"
 alias ls="ls --group-directories-first --color -h"
+alias sudo="sudo " # For alias support with sudo
 alias rn="perl-rename"
 alias naut="nautilus . NUL BG"
 alias arcsans="sudo sed -i 's/Cantarell/NotoSans, Cantarell/g' /usr/share/themes/Arc/gnome-shell/gnome-shell.css && gnome-shell --replace NUL BG" # Arc gnome-shell theme Sans font
