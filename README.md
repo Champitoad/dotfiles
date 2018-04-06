@@ -4,5 +4,5 @@ I manage my dotfiles with the excellent python program [`dotfiles`](https://gith
 To deploy on a new computer, just run:
 ```
 git clone git@github.com:Champitoad/dotfiles.git ~/dotfiles
-dotfiles -s -R dotfiles
+dotfiles -s -R ~/dotfiles
 ```
