@@ -190,6 +190,8 @@ bindsym XF86AudioRaiseVolume exec pamixer -i 5
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5
 
+bindsym Print exec maim -s ~/screenshot_$(date +%Y-%m-%d_%H:%M:%S).png 
+
 # Wallpaper mode
 
 set $mode_wallpaper wallpaper
@@ -210,6 +212,8 @@ set $mode_beatbox beatbox
 bindsym $mod+b mode "$mode_beatbox"
 
 mode "$mode_beatbox" {
+    bindsym Return exec play $samples_dir/badumtss.wav
+
     bindsym space exec play $samples_dir/beatbox/drums/bassdrum01.ogg
     bindsym a exec play $samples_dir/beatbox/drums/kick01.ogg
     bindsym z exec play $samples_dir/beatbox/drums/snare01.ogg
@@ -226,8 +230,10 @@ mode "$mode_beatbox" {
     bindsym v exec play $samples_dir/mooino/vianney.wav
     bindsym b exec play $samples_dir/mooino/vincent.wav
 
-    bindsym Return exec play $samples_dir/badumtss.wav
     bindsym p exec play $samples_dir/super.wav
+
+    bindsym n exec play $samples_dir/nikouli.wav
+    bindsym m exec play $samples_dir/makouli.wav
 
     bindsym F8 exec pamixer -t
     bindsym Up exec pamixer -i 5

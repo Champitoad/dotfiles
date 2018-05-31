@@ -157,7 +157,7 @@ alias sudo="sudo " # For alias support with sudo
 alias rn="perl-rename"
 alias naut="nautilus . NUL BG"
 alias arcsans="sudo sed -i 's/Cantarell/NotoSans, Cantarell/g' /usr/share/themes/Arc/gnome-shell/gnome-shell.css && gnome-shell --replace NUL BG" # Arc gnome-shell theme Sans font
-alias rmscr="rm -f ~/screenshot-*.png" # Removes all screenshots in ~
+alias rmscr="rm -f ~/screenshot_*.png" # Removes all screenshots in ~
 
 # Global aliases
 alias -g CC=" | xclip -sel 'clipboard'" # Clipboard Copy

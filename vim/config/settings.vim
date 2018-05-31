@@ -61,7 +61,8 @@ map <A-Up> :$tabm<CR>
 map <Tab> <C-w><C-w>
 
 " Color scheme
-colorscheme base16-default
+
+colorscheme base16-default-dark
 let base16colorspace=256
 autocmd ColorScheme * highlight Normal ctermbg=None
 autocmd ColorScheme * highlight LineNr ctermbg=None
@@ -98,6 +99,7 @@ Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'let-def/ocp-indent-vim'
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'chriskempson/base16-vim'
 
 call plug#end()
 
