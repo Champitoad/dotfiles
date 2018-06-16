@@ -100,6 +100,8 @@ Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'let-def/ocp-indent-vim'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'chriskempson/base16-vim'
+Plug 'cespare/vim-toml'
+Plug 'mattn/emmet-vim'
 
 call plug#end()
 
@@ -114,3 +116,6 @@ let g:pandoc#spell#enabled = 0
 " vim-table-mode
 let g:table_mode_corner_corner='+'
 let g:table_mode_header_fillchar='='
+
+" emmet-vim
+let g:user_emmet_leader_key='<C-X>'
