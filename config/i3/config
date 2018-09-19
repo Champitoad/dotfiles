@@ -182,7 +182,7 @@ hide_edge_borders smart
 
 ### Keybindings
 
-bindsym $mod+c exec chromium
+bindsym $mod+c exec firefox
 
 bindsym XF86AudioMute exec pamixer -t
 bindsym XF86AudioLowerVolume exec pamixer -d 5

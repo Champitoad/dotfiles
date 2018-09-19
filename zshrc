@@ -173,9 +173,12 @@ function mk {
     mkdir -p $1 && cd $1
 }
 
-# Backup file $1 with .bak extension
+# Backup files with .bak extension
 function bak {
-    cp $1 $1.bak
+    for file in $@
+    do
+        cp $file $file.bak
+    done
 }
 
 # Switch the names of files $1 and $2
