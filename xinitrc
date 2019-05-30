@@ -2,4 +2,5 @@
 xset r rate 300 30
 compton -b --no-fading-openclose
 udiskie &
+fcitx &
 exec i3

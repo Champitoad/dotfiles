@@ -58,7 +58,6 @@ map <A-Left> :-tabm<CR>
 map <A-Right> :+tabm<CR>
 map <A-Down> :0tabm<CR>
 map <A-Up> :$tabm<CR>
-map <Tab> <C-w><C-w>
 
 " Color scheme
 

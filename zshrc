@@ -177,7 +177,7 @@ function mk {
 function bak {
     for file in $@
     do
-        cp $file $file.bak
+        cp -rf $file $file.bak
     done
 }
 
@@ -230,6 +230,13 @@ function pdfpextr() {
        ${3}
 }
 
+# Merges in order PDF files $2- into PDF file $1 
+function pdfmerge() {
+    OUTPUT=$1
+    shift
+    gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile="$OUTPUT" $@
+}
+
 # Prints bank account password
 function pbpwd {
     pwd_archive=/mnt/data/Documents/MDP.7z
@@ -256,3 +263,5 @@ function mdview {
 
 # Zsh syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

@@ -9,5 +9,11 @@
 	name = Pablo Donato
 [core]
 	editor = vim
+	autocrlf = input
+	whitespace = cr-at-eol
 [push]
 	default = simple
+[merge]
+	tool = vimdiff
+[status]
+	showUntrackedFiles = no
