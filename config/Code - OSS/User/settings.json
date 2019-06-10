@@ -1,0 +1,114 @@
+{
+    "editor.fontSize": 13,
+    "window.zoomLevel": 1,
+    "editor.minimap.enabled": false,
+    "editor.rulers": [80],
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/*.olean": true
+    },
+    "terminal.integrated.shell.linux": "/usr/bin/zsh",
+    "terminal.integrated.shellArgs.linux": [
+        "-i"
+    ],
+    "explorer.openEditors.visible": 0,
+    "terminal.external.linuxExec": "termite",
+    "workbench.activityBar.visible": false,
+    "window.menuBarVisibility": "toggle",
+    "workbench.colorTheme": "1Dark RainCoat",
+    "prolog.dialect": "ecl",
+    "prolog.executablePath": "/home/pablo/.local/bin/jeclipse",
+    "explorer.confirmDelete": false,
+    "vim.useCtrlKeys": false,
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "u"
+            ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "undo",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": [
+                "<C-r>"
+            ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "redo",
+                    "args": []
+                }
+            ]
+        }
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "p"
+            ],
+            "after": [
+                "p",
+                "g",
+                "v",
+                "y"
+            ]
+        }
+    ],
+    "breadcrumbs.enabled": true,
+    "vim.useSystemClipboard": true,
+    "explorer.confirmDragAndDrop": false,
+    "revealjs.browserPath": "/usr/bin/chromium",
+    "latex-workshop.message.update.show": false,
+    "latex-workshop.view.pdf.viewer": "tab",
+    "git.confirmSync": false,
+    "terminal.integrated.rendererType": "dom",
+    "rewrap.wrappingColumn": 60,
+    "window.titleBarStyle": "native",
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-pdflatex=xelatex",
+                "-shell-escape",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ]
+        },
+        {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ]
+        },
+        {
+            "name": "bibtex",
+            "command": "bibtex",
+            "args": [
+                "%DOCFILE%"
+            ]
+        }
+    ],
+    "workbench.colorCustomizations": {
+        "editorInfo.foreground": "#00000000"
+    },
+    "reason.path.ocamlmerlin": "/home/pablo/.opam/system/bin/ocamlmerlin",
+    "editor.fontFamily": "'Hack'",
+}
