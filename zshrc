@@ -5,7 +5,8 @@ setopt nohashdirs
 
 ZSH=/home/pablo/.oh-my-zsh
 
-plugins=(vi-mode archlinux common-aliases dircycle git gitfast extras history-substring-search last-working-dir systemd z)
+plugins=(vi-mode archlinux common-aliases dircycle git gitfast history-substring-search last-working-dir systemd z)
+#plugins=()
 ZSH_THEME=""
 DEFAULT_USER=pablo
 source $ZSH/oh-my-zsh.sh

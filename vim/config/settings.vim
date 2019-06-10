@@ -78,6 +78,12 @@ augroup END
 au Syntax jflex so ~/.vim/syntax/jflex.vim
 au Syntax cup   so ~/.vim/syntax/cup.vim
 
+" Fix issue #197 of base16-vim
+
+function FixupBase16(info)
+    !sed -i '/Base16hi/\! s/a:\(attr\|guisp\)/l:\1/g' ~/.vim/plugged/base16-vim/colors/*.vim
+endfunction
+
 " vim-plug
 
 call plug#begin('/home/pablo/.vim/plugged')
@@ -98,7 +104,7 @@ Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'let-def/ocp-indent-vim'
 Plug 'dhruvasagar/vim-table-mode'
-Plug 'chriskempson/base16-vim'
+Plug 'chriskempson/base16-vim', { 'do': function('FixupBase16') }
 Plug 'cespare/vim-toml'
 Plug 'mattn/emmet-vim'
 

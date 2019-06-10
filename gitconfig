@@ -5,7 +5,7 @@
     co = checkout
     rgrep = !git grep
 [user]
-	email = pablo.donato@mailoo.org
+	email = pablo.donato@tuta.io
 	name = Pablo Donato
 [core]
 	editor = vim
