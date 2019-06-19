@@ -1,8 +1,8 @@
 {
-    "editor.fontSize": 13,
+    "editor.fontSize": 12,
     "window.zoomLevel": 1,
     "editor.minimap.enabled": false,
-    "editor.rulers": [80],
+    "editor.rulers": [100],
     "files.exclude": {
         "**/.git": true,
         "**/.svn": true,
@@ -71,7 +71,7 @@
     "latex-workshop.view.pdf.viewer": "tab",
     "git.confirmSync": false,
     "terminal.integrated.rendererType": "dom",
-    "rewrap.wrappingColumn": 60,
+    "rewrap.wrappingColumn": 100,
     "window.titleBarStyle": "native",
     "latex-workshop.latex.tools": [
         {
@@ -111,4 +111,6 @@
     },
     "reason.path.ocamlmerlin": "/home/pablo/.opam/system/bin/ocamlmerlin",
     "editor.fontFamily": "'Hack'",
+    "editor.wordWrapColumn": 100,
+    "vim.textwidth": 100,
 }
